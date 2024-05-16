@@ -24,13 +24,14 @@
     "views": {
       "django-overview": [
         {
-          "id": "django-overview.project",
-          "name": "Current Project",
-          "when": "inDjangoProject"
+          "id": "django-overview.get-started",
+          "name": "Get Started",
+          "when": "!djangoProjectDir"
         },
         {
-          "id": "django-overview.manage",
-          "name": "Manage"
+          "id": "django-overview.project",
+          "name": "Project",
+          "when": "djangoProjectDir"
         }
       ]
     }
