@@ -1,27 +1,36 @@
 import * as vscode from "vscode";
 
 export default class ProjectDataProvider
-  implements vscode.TreeDataProvider<number>
+  implements vscode.TreeDataProvider<vscode.TreeItem>
 {
-  private _onDidChangeTreeData: vscode.EventEmitter<
-    number | undefined | null | void
-  > = new vscode.EventEmitter<number | undefined | null | void>();
-  readonly onDidChangeTreeData: vscode.Event<number | undefined | null | void> =
-    this._onDidChangeTreeData.event;
-
-  getTreeItem(element: number): vscode.TreeItem {
-    return {
-      label: `Number: ${element}`,
-      iconPath: new vscode.ThemeIcon("gear"),
-      //   collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
-    };
+  getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
+    return element;
   }
 
-  getChildren(element?: number): Thenable<number[]> {
+  getChildren(element?: vscode.TreeItem): Thenable<vscode.TreeItem[]> {
     if (element === undefined) {
-      return Promise.resolve([1, 2, 3, 4, 5]);
+      // Return the root items
+      return Promise.resolve([
+        new vscode.TreeItem(
+          "Item 1",
+          vscode.TreeItemCollapsibleState.Collapsed
+        ),
+        new vscode.TreeItem(
+          "Item 2",
+          vscode.TreeItemCollapsibleState.Collapsed
+        ),
+        new vscode.TreeItem(
+          "Item 3",
+          vscode.TreeItemCollapsibleState.Collapsed
+        ),
+      ]);
     } else {
-      return Promise.resolve([]);
+      // Return the child items for the given parent item
+      return Promise.resolve([
+        new vscode.TreeItem("Subitem 1"),
+        new vscode.TreeItem("Subitem 2"),
+        new vscode.TreeItem("Subitem 3"),
+      ]);
     }
   }
 }
