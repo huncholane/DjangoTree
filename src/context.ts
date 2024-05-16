@@ -9,16 +9,20 @@ export const setDjangoContext = async () => {
       const dir = folder.uri.fsPath;
       const isDjango = await isDjangoProject(dir);
       const inDjango = isDjango || (await isInDjangoProject(path.dirname(dir)));
-      vscode.commands.executeCommand("setContext", "isDjangoProject", isDjango);
-      vscode.commands.executeCommand("setContext", "inDjangoProject", inDjango);
       if (isDjango || inDjango) {
-        vscode.commands.executeCommand("setContext", "djangoProjectDir", dir);
+        vscode.commands.executeCommand(
+          "setContext",
+          "django-overview.projectDir",
+          dir
+        );
       }
     }
   } else {
-    vscode.commands.executeCommand("setContext", "isDjangoProject", false);
-    vscode.commands.executeCommand("setContext", "inDjangoProject", false);
-    vscode.commands.executeCommand("setContext", "djangoProjectDir", null);
+    vscode.commands.executeCommand(
+      "setContext",
+      "django-overview.projectDir",
+      null
+    );
   }
 };
 
@@ -39,4 +43,12 @@ const isInDjangoProject = async (dir: string): Promise<boolean> => {
   }
 
   return isInDjangoProject(parentDir);
+};
+
+export const getDjangoProjectDir = () => {
+  return vscode.workspace.getConfiguration("django-overview").get("projectDir");
+};
+
+export const settingsFiles = () => {
+  const projectDir = getDjangoProjectDir();
 };

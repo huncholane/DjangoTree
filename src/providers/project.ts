@@ -27,10 +27,22 @@ export default class ProjectDataProvider
     } else {
       // Return the child items for the given parent item
       return Promise.resolve([
-        new vscode.TreeItem("Subitem 1"),
+        this.createSettingsTreeItem(),
         new vscode.TreeItem("Subitem 2"),
         new vscode.TreeItem("Subitem 3"),
       ]);
     }
+  }
+
+  private createSettingsTreeItem(): vscode.TreeItem {
+    const treeItem = new vscode.TreeItem("Settings");
+    treeItem.checkboxState = {
+      state: vscode.TreeItemCheckboxState.Checked,
+    };
+    treeItem.command = {
+      command: "django-overview.openSettings",
+      title: "Open Settings",
+    };
+    return treeItem;
   }
 }

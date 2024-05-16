@@ -12,6 +12,23 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Django Overview",
+      "properties": {
+        "django-overview.projectDir": {
+          "type": "string",
+          "description": "The root path to a directory containing the manage.py file."
+        },
+        "django-overview.skipDirs": {
+          "type": "array",
+          "description": "Directories to skip when searching for settings and models",
+          "default": [
+            "**/node_modules/**",
+            "**/__pycache__/**"
+          ]
+        }
+      }
+    },
     "viewsContainers": {
       "activitybar": [
         {
@@ -26,12 +43,12 @@
         {
           "id": "django-overview.get-started",
           "name": "Get Started",
-          "when": "!djangoProjectDir"
+          "when": "!django-overview.projectDir"
         },
         {
           "id": "django-overview.project",
           "name": "Project",
-          "when": "djangoProjectDir"
+          "when": "django-overview.projectDir"
         }
       ]
     }
