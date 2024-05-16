@@ -1,13 +1,11 @@
 import * as vscode from "vscode";
 import ProjectDataProvider from "./providers/project";
+import providers from "./providers";
+import commands from "./commands";
 
 export function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.concat([
-    vscode.window.registerTreeDataProvider(
-      "django-overview.project",
-      new ProjectDataProvider()
-    ),
-  ]);
+  context.subscriptions.concat(providers);
+  context.subscriptions.concat(commands);
 }
 
 // This method is called when your extension is deactivated
