@@ -4,6 +4,9 @@ import * as fs from "fs";
 
 export const setDjangoContext = async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
+  if (vscode.workspace.getConfiguration("django-overview").get("projectDir")) {
+    return;
+  }
   if (workspaceFolders) {
     for (const folder of workspaceFolders) {
       const dir = folder.uri.fsPath;
@@ -45,10 +48,10 @@ const isInDjangoProject = async (dir: string): Promise<boolean> => {
   return isInDjangoProject(parentDir);
 };
 
-export const getDjangoProjectDir = () => {
+export const getDjangoProjectDir = (): string | undefined => {
   return vscode.workspace.getConfiguration("django-overview").get("projectDir");
 };
 
-export const settingsFiles = () => {
-  const projectDir = getDjangoProjectDir();
+export const getSkipDirs = () => {
+  return vscode.workspace.getConfiguration("django-overview").get("skipDirs");
 };
