@@ -12,14 +12,6 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "django-overview.managePyExists",
-        "title": "Check if manage.py exists",
-        "category": "Django Overview",
-        "icon": "resources/django.svg"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -33,7 +25,8 @@
       "django-overview": [
         {
           "id": "django-overview.project",
-          "name": "Current Project"
+          "name": "Current Project",
+          "when": "isDjangoProject"
         },
         {
           "id": "django-overview.manage",
