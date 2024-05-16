@@ -24,14 +24,12 @@
     "views": {
       "django-overview": [
         {
-          "id": "settings",
-          "name": "Settings",
-          "icon": "resources/settings.svg"
+          "id": "django-overview.project",
+          "name": "Current Project"
         },
         {
-          "id": "django-overview",
-          "name": "Models",
-          "icon": "resources/models.svg"
+          "id": "django-overview.commands",
+          "name": "Commands"
         }
       ]
     }
