@@ -13,6 +13,8 @@ suite("Extension Test Suite", () => {
     console.log("HELLO");
     const project = new DjangoProject("sample");
     await project.parseManagePy();
-    console.log(project);
+    await project.parseSettings();
+    console.log("Project:");
+    console.log(JSON.stringify(project, null, 2));
   });
 });
