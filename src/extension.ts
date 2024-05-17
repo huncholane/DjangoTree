@@ -3,7 +3,7 @@ import ProjectDataProvider from "./providers/project";
 import providers from "./providers";
 import commands from "./commands";
 import { setDjangoContext } from "./context";
-import listeners from "./listeners";
+import listeners from "./events";
 
 export async function activate(context: vscode.ExtensionContext) {
   await setDjangoContext();

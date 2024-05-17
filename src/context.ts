@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
 import DjangoProject from "./project";
-import { onDjangoProject } from "./listeners";
+import { djangoProjectUpdate } from "./events";
 
 export const setDjangoContext = async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -37,7 +37,7 @@ export const setDjangoContext = async () => {
       "django-overview.project",
       project
     );
-    onDjangoProject.fire(project);
+    djangoProjectUpdate.fire(project);
     console.log("Django context set");
   }
 };
