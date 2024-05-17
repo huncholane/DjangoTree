@@ -18,6 +18,7 @@ export type Field = {
 export type Model = {
   name: string;
   index: number;
+  filename: string;
   fields: Map<string, Field>;
 };
 
@@ -62,6 +63,7 @@ if spec is not None and spec.origin is not None:
         const model: Model = {
           name: modelMatch[1],
           index: modelMatch.index || 0,
+          filename: `${this.path}/models.py`,
           fields: new Map(),
         };
         const fields = modelMatch[2].matchAll(regex.modelField);

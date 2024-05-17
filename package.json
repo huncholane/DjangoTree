@@ -12,6 +12,13 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "django-overview.openFile": {
+          "title": "Open File"
+        }
+      }
+    ],
     "configuration": {
       "title": "Django Overview",
       "properties": {
