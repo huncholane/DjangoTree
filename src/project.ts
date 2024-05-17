@@ -8,28 +8,28 @@ import * as vscode from "vscode";
 
 const readFile = promisify(fs.readFile);
 
-type Field = {
+export type Field = {
   name: string;
   type: string;
   index: number;
   raw: string;
 };
 
-type Model = {
+export type Model = {
   name: string;
   index: number;
-  fields: Field[];
+  fields: Map<string, Field>;
 };
 
-class App {
+export class App {
   name: string;
   module: string;
   path: string;
-  models: Model[];
+  models: Map<string, Model>;
 
   constructor(module: string) {
     this.module = module;
-    this.models = [];
+    this.models = new Map();
     let name = module.split(".").pop();
     const pythonPath =
       vscode.workspace.getConfiguration("python").get("pythonPath") ||
@@ -62,7 +62,7 @@ if spec is not None and spec.origin is not None:
         const model: Model = {
           name: modelMatch[1],
           index: modelMatch.index || 0,
-          fields: [],
+          fields: new Map(),
         };
         const fields = modelMatch[2].matchAll(regex.modelField);
         for (const fieldMatch of fields) {
@@ -72,9 +72,9 @@ if spec is not None and spec.origin is not None:
             index: fieldMatch.index || 0,
             raw: fieldMatch[0],
           };
-          model.fields.push(field);
+          model.fields.set(field.name, field);
         }
-        this.models.push(model);
+        this.models.set(model.name, model);
       }
     } catch (err) {
       // throw new Error(`Error reading models.py for app ${this.name}`);
@@ -85,11 +85,11 @@ if spec is not None and spec.origin is not None:
 export default class DjangoProject {
   projectDir: string;
   name?: string;
-  apps: App[];
+  apps: Map<string, App>;
 
   constructor(rootDir: string) {
     this.projectDir = rootDir;
-    this.apps = [];
+    this.apps = new Map();
   }
 
   async read() {
@@ -118,7 +118,7 @@ export default class DjangoProject {
     const apps = appContainer.matchAll(regex.module);
     for (const app of apps ? apps : []) {
       try {
-        this.apps.push(new App(app[1]));
+        this.apps.set(app[1], new App(app[1]));
       } catch {}
     }
   }
