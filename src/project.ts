@@ -12,6 +12,7 @@ type Field = {
   name: string;
   type: string;
   index: number;
+  raw: string;
 };
 
 type Model = {
@@ -48,14 +49,12 @@ if spec is not None and spec.origin is not None:
   `;
     try {
       const result = childProcess
-        .execSync(`${pythonPath} -c "${pythonScript}"`)
+        .execSync(`${pythonPath} -c "${pythonScript}" 2>/dev/null`)
         .toString();
       this.path = result.trim();
     } catch (error) {
-      console.error(error);
       throw new Error(`Error getting path for app ${this.name}`);
     }
-    console.log(`Reading models.py for app ${this.name}`);
     try {
       const data = fs.readFileSync(`${this.path}/models.py`, "utf-8");
       const models = data.matchAll(regex.model);
@@ -71,14 +70,13 @@ if spec is not None and spec.origin is not None:
             name: fieldMatch[1],
             type: fieldMatch[2],
             index: fieldMatch.index || 0,
+            raw: fieldMatch[0],
           };
           model.fields.push(field);
         }
         this.models.push(model);
       }
-      console.log(models);
     } catch (err) {
-      console.error(`Error reading models.py for app ${this.name}`);
       // throw new Error(`Error reading models.py for app ${this.name}`);
     }
   }
@@ -119,14 +117,9 @@ export default class DjangoProject {
     const appContainer = appContainerMatch ? appContainerMatch[1] : "";
     const apps = appContainer.matchAll(regex.module);
     for (const app of apps ? apps : []) {
-      this.apps.push(new App(app[1]));
+      try {
+        this.apps.push(new App(app[1]));
+      } catch {}
     }
-    console.log(apps);
   }
 }
-
-export const getProject = async () => {};
-
-export const getAvailableApps = async () => {
-  const projectDir = getDjangoProjectDir();
-};

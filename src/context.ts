@@ -1,15 +1,16 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
+import DjangoProject from "./project";
 
 export const setDjangoContext = async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (vscode.workspace.getConfiguration("django-overview").get("projectDir")) {
-    return;
-  }
-  if (workspaceFolders) {
+  let dir = vscode.workspace
+    .getConfiguration("django-overview")
+    .get("projectDir") as string;
+  if (workspaceFolders && !dir) {
     for (const folder of workspaceFolders) {
-      const dir = folder.uri.fsPath;
+      dir = folder.uri.fsPath;
       const isDjango = await isDjangoProject(dir);
       const inDjango = isDjango || (await isInDjangoProject(path.dirname(dir)));
       if (isDjango || inDjango) {
@@ -25,6 +26,15 @@ export const setDjangoContext = async () => {
       "setContext",
       "django-overview.projectDir",
       null
+    );
+  }
+  if (dir) {
+    const project = new DjangoProject(dir);
+    await project.read();
+    vscode.commands.executeCommand(
+      "setContext",
+      "django-overview.project",
+      project
     );
   }
 };
