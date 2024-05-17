@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import DjangoProject, { Model } from "../project";
+import DjangoProject, { App, Model } from "../project";
 
 export default class ProjectDataProvider
   implements vscode.TreeDataProvider<vscode.TreeItem>
@@ -9,7 +9,6 @@ export default class ProjectDataProvider
   project?: DjangoProject;
 
   update(project: DjangoProject) {
-    console.log("updating the tree");
     this.project = project;
     this._update.fire();
   }
@@ -30,7 +29,11 @@ export default class ProjectDataProvider
       return Promise.resolve(items);
     } else if (element.contextValue?.includes("-app")) {
       const appName = element.contextValue.split("-")[0];
-      return Promise.resolve([this.createModelsTreeItem(appName)]);
+      const app = this.project.apps.get(appName);
+      if (!app) {
+        return Promise.resolve([]);
+      }
+      return Promise.resolve([this.createModelsTreeItem(app)]);
     } else if (element.contextValue?.includes("-models")) {
       const appName = element.contextValue.split("-")[0];
       const app = this.project.apps.get(appName);
@@ -75,15 +78,22 @@ export default class ProjectDataProvider
       command: "django-overview.openFile",
       title: "Open File",
       arguments: [model.filename, model.index],
+      tooltip: `Go to ${model.name}`,
     };
     return treeItem;
   }
 
-  private createModelsTreeItem(appName: string): vscode.TreeItem {
+  private createModelsTreeItem(app: App): vscode.TreeItem {
     const treeItem = new vscode.TreeItem("Models");
-    treeItem.contextValue = `${appName}-models`;
+    treeItem.contextValue = `${app.name}-models`;
     treeItem.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
     treeItem.iconPath = new vscode.ThemeIcon("database");
+    treeItem.command = {
+      command: "django-overview.openFile",
+      title: "Open File",
+      arguments: [`${app.path}/models.py`, 0],
+      tooltip: "Open models.py",
+    };
     return treeItem;
   }
 
