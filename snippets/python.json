@@ -67,15 +67,15 @@
     "body": [
       "from channels.generic.websocket import AsyncWebsocketConsumer",
       "",
-      "class $1Consumer(AsyncWebsocketConsumer):",
+      "class ${1:MyConsumer}(AsyncWebsocketConsumer):",
       "\tasync def connect(self):",
-      "\t\t$2",
+      "\t\t${2:print('Connected!')}",
       "",
       "\tasync def disconnect(self, close_code):",
-      "\t\t$3",
+      "\t\t${3:print('Disconnected!')}",
       "",
       "\tasync def receive(self, text_data):",
-      "\t\t$4"
+      "\t\t${4:print('Received:', text_data)}"
     ],
     "description": "Snippet for a Django Channels consumer"
   }
