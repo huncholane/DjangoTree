@@ -14,9 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "django-tree.openFile": {
-          "title": "Open File"
-        }
+        "title": "Open File",
+        "command": "django-tree.openFile"
       }
     ],
     "configuration": {
