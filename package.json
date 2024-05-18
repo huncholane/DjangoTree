@@ -2,6 +2,7 @@
   "name": "django-tree",
   "icon": "resources/logo-512x512.png",
   "displayName": "django-tree",
+  "license": "Apache-2.0",
   "description": "Shows the settings and models for the current django project",
   "repository": {
     "type": "git",
