@@ -14,7 +14,8 @@
   "DjangoTree Websocket URLs": {
     "prefix": "dt-ws-urls",
     "body": [
-      "from django.urls import path, re_path, include",
+      "from django.urls import path, re_path",
+      "from channels.routing import URLRouter",
       "from . import consumers",
       "",
       "websocket_urlpatterns = [",
@@ -60,5 +61,22 @@
       "\tserializer_class = $1Serializer"
     ],
     "description": "Snippet for a Django REST Framework viewset"
+  },
+  "DjangoTree Consumer": {
+    "prefix": "dt-consumer",
+    "body": [
+      "from channels.generic.websocket import AsyncWebsocketConsumer",
+      "",
+      "class $1Consumer(AsyncWebsocketConsumer):",
+      "\tasync def connect(self):",
+      "\t\t$2",
+      "",
+      "\tasync def disconnect(self, close_code):",
+      "\t\t$3",
+      "",
+      "\tasync def receive(self, text_data):",
+      "\t\t$4"
+    ],
+    "description": "Snippet for a Django Channels consumer"
   }
 }
