@@ -2,7 +2,7 @@
   "DjangoTree URLs": {
     "prefix": "dt-urls",
     "body": [
-      "from django.urls import path, re_path",
+      "from django.urls import path, re_path, include",
       "from . import views",
       "",
       "urlpatterns = [",
@@ -14,7 +14,7 @@
   "DjangoTree Websocket URLs": {
     "prefix": "dt-ws-urls",
     "body": [
-      "from django.urls import path, re_path",
+      "from django.urls import path, re_path, include",
       "from . import consumers",
       "",
       "websocket_urlpatterns = [",
