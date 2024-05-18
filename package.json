@@ -1,5 +1,6 @@
 {
   "name": "django-tree",
+  "icon": "resources/logo-512x512.png",
   "displayName": "django-tree",
   "description": "Shows the settings and models for the current django project",
   "repository": {

@@ -1,4 +1,4 @@
-# django-tree README
+# DjangoTree README
 
 A way to see all the core components of installed apps on a django project. Map out the models, settings, serializers, and urls. 
 Click to go to them. 
@@ -7,11 +7,11 @@ Click to go to them.
 
 ## Features
 
-[x] Model Tree
-[] Url Tree
-[] Static Tree
-[] Settings Tree
-[] Serializer Tree
+- [x] Model Tree
+- [ ] Url Tree
+- [ ] Static Tree
+- [ ] Settings Tree
+- [ ] Serializer Tree
 
 ## Requirements
 
@@ -22,6 +22,8 @@ Click to go to them.
 * `django-tree.projectDir`: Set the root for a django project instead of searching for it.
 
 ## Known Issues
+
+- Models need to have fields at the beginning of the class declaration to work.
 
 ## Release Notes
 
