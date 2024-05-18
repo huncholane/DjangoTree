@@ -2,12 +2,16 @@
   "name": "django-tree",
   "displayName": "django-tree",
   "description": "Shows the settings and models for the current django project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huncholane/DjangoTree"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
   },
   "categories": [
-    "Other"
+    "Extension Packs"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
