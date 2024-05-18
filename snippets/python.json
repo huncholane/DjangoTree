@@ -1,0 +1,64 @@
+{
+  "DjangoTree URLs": {
+    "prefix": "dt-urls",
+    "body": [
+      "from django.urls import path, re_path",
+      "from . import views",
+      "",
+      "urlpatterns = [",
+      "$1",
+      "]"
+    ],
+    "description": "Snippet for a Django URLs file"
+  },
+  "DjangoTree Websocket URLs": {
+    "prefix": "dt-ws-urls",
+    "body": [
+      "from django.urls import path, re_path",
+      "from . import consumers",
+      "",
+      "websocket_urlpatterns = [",
+      "\t$1",
+      "]"
+    ],
+    "description": "Snippet for a Django Websocket URLs file"
+  },
+  "DjangoTree Command": {
+    "prefix": "dt-command",
+    "body": [
+      "from django.core.management.base import BaseCommand",
+      "",
+      "class Command(BaseCommand):",
+      "\thelp = '$1'",
+      "",
+      "\tdef handle(self, *args, **options):",
+      "\t\t$2"
+    ],
+    "description": "Snippet for a Django management command"
+  },
+  "DjangoTree Serializers": {
+    "prefix": "dt-serializers",
+    "body": [
+      "from rest_framework import serializers",
+      "",
+      "class $1Serializer(serializers.ModelSerializer):",
+      "\tclass Meta:",
+      "\t\tmodel = $2",
+      "\t\tfields = '__all__'"
+    ],
+    "description": "Snippet for a Django REST Framework serializer"
+  },
+  "DjangoTree ViewSet": {
+    "prefix": "dt-viewset",
+    "body": [
+      "from rest_framework import viewsets",
+      "from .models import $1",
+      "from .serializers import $1Serializer",
+      "",
+      "class $1ViewSet(viewsets.ModelViewSet):",
+      "\tqueryset = $1.objects.all()",
+      "\tserializer_class = $1Serializer"
+    ],
+    "description": "Snippet for a Django REST Framework viewset"
+  }
+}

@@ -9,16 +9,23 @@
     "type": "git",
     "url": "https://github.com/huncholane/DjangoTree"
   },
-  "version": "0.0.11",
+  "version": "0.0.12",
   "engines": {
     "vscode": "^1.89.0"
   },
   "categories": [
-    "Extension Packs"
+    "Extension Packs",
+    "Snippets"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippets/python.json"
+      }
+    ],
     "commands": [
       {
         "title": "Open File",
