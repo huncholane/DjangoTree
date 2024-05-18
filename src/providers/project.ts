@@ -75,7 +75,7 @@ export default class ProjectDataProvider
     treeItem.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
     treeItem.iconPath = new vscode.ThemeIcon("symbol-class");
     treeItem.command = {
-      command: "django-overview.openFile",
+      command: "django-tree.openFile",
       title: "Open File",
       arguments: [model.filename, model.index],
       tooltip: `Go to ${model.name}`,
@@ -89,7 +89,7 @@ export default class ProjectDataProvider
     treeItem.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
     treeItem.iconPath = new vscode.ThemeIcon("database");
     treeItem.command = {
-      command: "django-overview.openFile",
+      command: "django-tree.openFile",
       title: "Open File",
       arguments: [`${app.path}/models.py`, 0],
       tooltip: "Open models.py",

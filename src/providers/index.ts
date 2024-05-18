@@ -5,7 +5,7 @@ export const projectDataProvider = new ProjectDataProvider();
 
 export default [
   vscode.window.registerTreeDataProvider(
-    "django-overview.project",
+    "django-tree.project",
     projectDataProvider
   ),
 ];

@@ -7,7 +7,7 @@ import { djangoProjectUpdate } from "./events";
 export const setDjangoContext = async () => {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   let dir = vscode.workspace
-    .getConfiguration("django-overview")
+    .getConfiguration("django-tree")
     .get("projectDir") as string;
   if (workspaceFolders && !dir) {
     for (const folder of workspaceFolders) {
@@ -17,7 +17,7 @@ export const setDjangoContext = async () => {
       if (isDjango || inDjango) {
         vscode.commands.executeCommand(
           "setContext",
-          "django-overview.projectDir",
+          "django-tree.projectDir",
           dir
         );
       }
@@ -25,7 +25,7 @@ export const setDjangoContext = async () => {
   } else {
     vscode.commands.executeCommand(
       "setContext",
-      "django-overview.projectDir",
+      "django-tree.projectDir",
       null
     );
   }
@@ -34,7 +34,7 @@ export const setDjangoContext = async () => {
     await project.read();
     vscode.commands.executeCommand(
       "setContext",
-      "django-overview.project",
+      "django-tree.project",
       project
     );
     djangoProjectUpdate.fire(project);
@@ -62,9 +62,9 @@ const isInDjangoProject = async (dir: string): Promise<boolean> => {
 };
 
 export const getDjangoProjectDir = (): string | undefined => {
-  return vscode.workspace.getConfiguration("django-overview").get("projectDir");
+  return vscode.workspace.getConfiguration("django-tree").get("projectDir");
 };
 
 export const getSkipDirs = () => {
-  return vscode.workspace.getConfiguration("django-overview").get("skipDirs");
+  return vscode.workspace.getConfiguration("django-tree").get("skipDirs");
 };

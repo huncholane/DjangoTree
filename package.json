@@ -1,6 +1,6 @@
 {
-  "name": "django-overview",
-  "displayName": "django-overview",
+  "name": "django-tree",
+  "displayName": "django-tree",
   "description": "Shows the settings and models for the current django project",
   "version": "0.0.1",
   "engines": {
@@ -14,19 +14,19 @@
   "contributes": {
     "commands": [
       {
-        "django-overview.openFile": {
+        "django-tree.openFile": {
           "title": "Open File"
         }
       }
     ],
     "configuration": {
-      "title": "Django Overview",
+      "title": "DjangoTree",
       "properties": {
-        "django-overview.projectDir": {
+        "django-tree.projectDir": {
           "type": "string",
           "description": "The root path to a directory containing the manage.py file."
         },
-        "django-overview.skipDirs": {
+        "django-tree.skipDirs": {
           "type": "array",
           "description": "Directories to skip when searching for settings and models",
           "default": [
@@ -39,23 +39,23 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "django-overview",
-          "title": "Django Overview",
+          "id": "django-tree",
+          "title": "DjangoTree",
           "icon": "resources/django.svg"
         }
       ]
     },
     "views": {
-      "django-overview": [
+      "django-tree": [
         {
-          "id": "django-overview.get-started",
+          "id": "django-tree.get-started",
           "name": "Get Started",
-          "when": "!django-overview.projectDir"
+          "when": "!django-tree.projectDir"
         },
         {
-          "id": "django-overview.project",
+          "id": "django-tree.project",
           "name": "Project",
-          "when": "django-overview.projectDir"
+          "when": "django-tree.projectDir"
         }
       ]
     }

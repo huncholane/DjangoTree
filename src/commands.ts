@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 export default [
   vscode.commands.registerCommand(
-    "django-overview.openFile",
+    "django-tree.openFile",
     (location: string, index: number) => {
       vscode.window
         .showTextDocument(vscode.Uri.file(location))
